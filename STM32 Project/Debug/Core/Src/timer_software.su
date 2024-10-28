@@ -1,0 +1,3 @@
+timer_software.c:16:6:setTimer1	16	static
+timer_software.c:22:6:setTimer2	16	static
+timer_software.c:29:6:timerRun	4	static

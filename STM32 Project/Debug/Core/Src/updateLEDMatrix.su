@@ -1,0 +1,2 @@
+updateLEDMatrix.c:24:6:displayMatrix	24	static
+updateLEDMatrix.c:95:6:updateLEDMatrix	16	static
