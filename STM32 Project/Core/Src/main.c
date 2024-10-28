@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "Ex3.h"
+#include "update7SEG.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -237,11 +237,30 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+//TODO Ex3
+
+const int MAX_LED = 4;
+int index_led = 0;
+int led_buffer[4] = {1 , 2 , 3 , 4};
+int counter = 0;
+int counter_2LED = 0;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	//TODO Ex3
-	ex3();
+	if (index_led == MAX_LED) index_led = 0;
+	if (counter_2LED == 0)
+	{
+		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		counter_2LED = 100;
+	}
+	if (counter == 0)
+	{
+		update7SEG(index_led++);
+		counter = 50;
+	}
+	counter--;
+	counter_2LED--;
+
 }
 
 /* USER CODE END 4 */

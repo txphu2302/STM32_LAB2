@@ -1,18 +1,11 @@
 /*
- * Ex3.c
+ * update7SEG.c
  *
  *  Created on: Oct 28, 2024
  *      Author: Acer
  */
 
-
-#include "Ex3.h"
-
-const int MAX_LED = 4;
-int index_led = 0;
-int led_buffer[4] = {1 , 2 , 3 , 4};
-int counter = 0;
-int counter_2LED = 0;
+#include "update7SEG.h"
 
 void update7SEG(int index)
 {
@@ -54,21 +47,3 @@ void update7SEG(int index)
 		 break;
 	 }
  }
-
-void ex3()
-{
-	if (index_led == MAX_LED) index_led = 0;
-	if (counter_2LED == 0)
-	{
-		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-		counter_2LED = 100;
-	}
-	if (counter == 0)
-	{
-		update7SEG(index_led++);
-		counter = 50;
-	}
-
-	counter--;
-	counter_2LED--;
-}
