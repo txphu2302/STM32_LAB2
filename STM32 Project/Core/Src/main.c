@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "display7SEG.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,7 +89,7 @@ int main(void)
   MX_TIM2_Init();
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -237,7 +237,61 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+int counter_1 = 0;
+int counter_2 = 0;
+int status2 = 0;
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (counter_2 == 0)
+	{
+		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		counter_2 = 100;
+	}
+	if (counter_1 == 0)
+	{
+		counter_1 = 50;
+		switch(status2)
+		{
+			case 0:
+				HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
+				HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+				HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+				HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+				display7SEG(1);
+				status2 = 1;
+				break;
+			case 1:
+				HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+				HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+				HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+				HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+				display7SEG(2);
+				status2 = 2;
+				break;
+			case 2:
+				HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+				HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+				HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
+				HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+				display7SEG(3);
+				status2 = 3;
+				break;
+			case 3:
+				HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+				HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+				HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+				HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
+				display7SEG(0);
+				status2 = 0;
+				break;
+			default:
+				break;
+		}
+	}
+	counter_1--;
+	counter_2--;
+}
 /* USER CODE END 4 */
 
 /**
