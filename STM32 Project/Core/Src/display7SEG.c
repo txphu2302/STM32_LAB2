@@ -7,10 +7,7 @@
 
 #include "display7SEG.h"
 
-int status = 1;
-int count = 0;
-
-void ex1()
+void display7SEG(int num)
 {
 	switch(num)
 		{
