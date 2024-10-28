@@ -12,5 +12,6 @@
 
 extern int hour, minute, second;
 
+void updateClockBuffer();
 
 #endif /* INC_UPDATECLOCKBUFFER_H_ */
