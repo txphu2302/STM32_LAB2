@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "display7SEG.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,7 +89,7 @@ int main(void)
   MX_TIM2_Init();
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -99,6 +99,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
   }
   /* USER CODE END 3 */
 }
@@ -237,6 +238,33 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+//TODO Ex1
+int status = 1;
+int count = 0;
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (count == 0)
+	{
+		count = 50;
+		if (status)
+		{
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+			display7SEG(1);
+			status = 0;
+		}
+		else
+		{
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+			display7SEG(2);
+			status = 1;
+		}
+	}
+	count--;
+}
+
 
 /* USER CODE END 4 */
 
