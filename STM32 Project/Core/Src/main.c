@@ -99,7 +99,7 @@ int main(void)
   int hour = 15 , minute = 8 , second = 50;
   while (1)
   {
-	  //TODO Ex7
+	  //TODO Ex7+8
 	  if (timer1_flag == 1)
 	  {
 		  setTimer1(1000);
