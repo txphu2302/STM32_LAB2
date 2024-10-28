@@ -99,12 +99,28 @@ int main(void)
   while (1)
   {
 	  //TODO Ex9
+//	  if (timer1_flag == 1)
+//	  {
+//		  setTimer1(500);
+//		  if (index_led_matrix == MAX_LED_MATRIX) index_led_matrix = 0;
+//		  updateLEDMatrix(index_led_matrix++);
+//	  }
+	  //TODO Ex10
 	  if (timer1_flag == 1)
 	  {
-		  setTimer1(500);
+		  setTimer1(1000);
 		  if (index_led_matrix == MAX_LED_MATRIX) index_led_matrix = 0;
-		  updateLEDMatrix(index_led_matrix++);
-	  }
+		  updateLEDMatrix(index_led_matrix);
+		  if (matrix_buffer[index_led_matrix] & 0b10000000)
+		  {
+			  matrix_buffer[index_led_matrix] = (matrix_buffer[index_led_matrix] << 1) + 1;
+		  }
+		  else
+		  {
+			  matrix_buffer[index_led_matrix] = matrix_buffer[index_led_matrix] << 1;
+		  }
+		  index_led_matrix++;
+	  	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
