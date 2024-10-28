@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "updateClockBuffer.h"
+#include "timer_software.h"
 
 /* USER CODE END Includes */
 
@@ -95,9 +96,35 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+  int hour = 15 , minute = 8 , second = 50;
   while (1)
   {
+	  //TODO Ex7
+	  if (timer1_flag == 1)
+	  {
+		  setTimer1(1000);
+		  second++;
+		  if (second >= 60)
+		  {
+			  second = 0;
+			  minute++;
+		  }
+		  if (minute >= 60)
+		  {
+			  minute = 0;
+			  hour++;
+		  }
+		  if (hour >= 24)
+		  {
+			  hour = 0;
+		  }
+		  updateClockBuffer(hour, minute, second);
+	  }
+	  if (timer2_flag == 1)
+	  {
+		  setTimer2(1000);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -239,7 +266,10 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	timerRun();
+}
 
 /* USER CODE END 4 */
 

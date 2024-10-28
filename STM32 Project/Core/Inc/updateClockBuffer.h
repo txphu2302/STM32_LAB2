@@ -10,7 +10,6 @@
 
 #include "update7SEG.h"
 
-extern int hour, minute, second;
 
-
+void updateClockBuffer();
 #endif /* INC_UPDATECLOCKBUFFER_H_ */

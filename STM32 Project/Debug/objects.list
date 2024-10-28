@@ -5,6 +5,7 @@
 "./Core/Src/syscalls.o"
 "./Core/Src/sysmem.o"
 "./Core/Src/system_stm32f1xx.o"
+"./Core/Src/timer_software.o"
 "./Core/Src/update7SEG.o"
 "./Core/Src/updateClockBuffer.o"
 "./Core/Startup/startup_stm32f103c6ux.o"

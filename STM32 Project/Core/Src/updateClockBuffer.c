@@ -8,11 +8,10 @@
 #include "updateClockBuffer.h"
 
 int led_buffer[4];
-int hour = 15 , minute = 8 , second = 50;
 int status = 0;
 
 //Todo Ex5
-void updateClockBuffer()
+void updateClockBuffer(int hour, int minute, int second)
 {
 	led_buffer[0] = hour / 10;
 	led_buffer[1] = hour % 10;
